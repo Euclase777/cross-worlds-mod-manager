@@ -1,0 +1,267 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgd8qjkur4o3"]
+
+[ext_resource type="Script" uid="uid://6jh33j1rpfwk" path="res://main_scene.gd" id="1_3mqji"]
+[ext_resource type="Script" uid="uid://dawmrae7xdgr0" path="res://window_profile.gd" id="2_x4av3"]
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -585.0
+offset_bottom = -666.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3mqji")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 585.0
+offset_bottom = 666.0
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Mods" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Mods"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxModsList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Folder Example"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "File Example"
+
+[node name="Settings" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBoxGame" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+
+[node name="LabelGame" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Game Directory:"
+
+[node name="LineGame" type="LineEdit" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="ButtonBrowseGame" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Browse"
+
+[node name="ButtonOpenGame" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Open"
+
+[node name="HBoxMods" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+
+[node name="LabelMods" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Mods Directory:"
+
+[node name="LineMods" type="LineEdit" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="ButtonBrowseMods" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Browse"
+
+[node name="ButtonOpenMods" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Open"
+
+[node name="HBoxProfile" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings"]
+layout_mode = 2
+
+[node name="LabelProile" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxProfile"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Profile:"
+
+[node name="OptionProfile" type="OptionButton" parent="VBoxContainer/TabContainer/Settings/HBoxProfile"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_reselect = true
+
+[node name="ButtonConfigProfile" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxProfile"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Config
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 57)
+layout_mode = 2
+alignment = 1
+
+[node name="ButtonAdd" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Mod"
+
+[node name="ButtonRefreshList" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Refresh List"
+
+[node name="ButtonSave" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Save"
+
+[node name="ButtonPlay" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Save and Play"
+
+[node name="WindowProfile" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Profiles"
+initial_position = 1
+size = Vector2i(585, 442)
+transient = true
+exclusive = true
+borderless = true
+popup_window = true
+extend_to_title = true
+script = ExtResource("2_x4av3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WindowProfile"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowProfile/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelProfileName" type="Label" parent="WindowProfile/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+horizontal_alignment = 1
+
+[node name="LabelFileName" type="Label" parent="WindowProfile/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "File Name"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WindowProfile/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WindowProfile/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton"]
+layout_mode = 0
+offset_right = 593.0
+offset_bottom = 31.0
+
+[node name="LineEdit" type="LineEdit" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit2" type="LineEdit" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxWindowProfile" type="HBoxContainer" parent="WindowProfile/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonCreateProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create"
+
+[node name="ButtonImportProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Import"
+
+[node name="ButtonRemoveProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove"
+
+[node name="ButtonOKProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "OK"
+
+[connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxGame/ButtonBrowseGame" to="." method="_on_button_browse_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxGame/ButtonOpenGame" to="." method="_on_button_open_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxMods/ButtonBrowseMods" to="." method="_on_button_browse_mods_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxMods/ButtonOpenMods" to="." method="_on_button_open_mods_pressed"]
+[connection signal="item_selected" from="VBoxContainer/TabContainer/Settings/HBoxProfile/OptionProfile" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxProfile/ButtonConfigProfile" to="." method="_on_button_config_profile_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonAdd" to="." method="_on_button_add_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonRefreshList" to="." method="_on_button_refresh_list_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonSave" to="." method="_on_button_save_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="about_to_popup" from="WindowProfile" to="WindowProfile" method="_on_about_to_popup"]
+[connection signal="pressed" from="WindowProfile/VBoxContainer/HBoxWindowProfile/ButtonCreateProfile" to="WindowProfile" method="_on_button_create_profile_pressed"]
+[connection signal="pressed" from="WindowProfile/VBoxContainer/HBoxWindowProfile/ButtonRemoveProfile" to="WindowProfile" method="_on_button_remove_profile_pressed"]
+[connection signal="pressed" from="WindowProfile/VBoxContainer/HBoxWindowProfile/ButtonOKProfile" to="WindowProfile" method="_on_button_ok_profile_pressed"]
