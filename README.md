@@ -30,7 +30,7 @@ Which at the time of creating this tool were lacking the critical feature of pro
 
 ## Requirements
 
-- Windows or Linux
+- Windows
 - Sonic Racing CrossWorlds installed  
 - Mods stored in a folder on your PC  
 
