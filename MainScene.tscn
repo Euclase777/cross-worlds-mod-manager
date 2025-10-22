@@ -31,6 +31,7 @@ metadata/_tab_index = 0
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Mods"]
 layout_mode = 2
 size_flags_vertical = 3
+vertical_scroll_mode = 2
 
 [node name="VBoxModsList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer"]
 layout_mode = 2
@@ -38,7 +39,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList"]
-visible = false
 layout_mode = 2
 columns = 2
 
@@ -46,11 +46,10 @@ columns = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "Folder Example"
+toggle_mode = true
+text = "Collapse"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
 layout_mode = 2
@@ -66,7 +65,7 @@ columns = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -150,7 +149,7 @@ alignment = 1
 [node name="ButtonAdd" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Add Mod"
+text = "Add Mod From Zip"
 
 [node name="ButtonRefreshList" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -172,6 +171,7 @@ oversampling_override = 1.0
 title = "Profiles"
 initial_position = 1
 size = Vector2i(585, 442)
+visible = false
 transient = true
 exclusive = true
 borderless = true

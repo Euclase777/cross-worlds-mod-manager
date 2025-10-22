@@ -177,7 +177,7 @@ func refresh_mod_list(list : VBoxContainer, path : String) -> void:
 		if (not file_name.begins_with(".")) and (not file_name.ends_with(".ini")):
 			var gc = GridContainer.new()
 			var cb = CheckBox.new()
-			var label = Label.new()
+			var label = Button.new()
 			list.add_child(gc)
 			gc.name=file_name
 			gc.columns=2
@@ -188,8 +188,17 @@ func refresh_mod_list(list : VBoxContainer, path : String) -> void:
 			gc.add_child(label)
 			label.text=file_name
 			if dir.current_is_dir():
-				var sep = VSeparator.new()
 				var vbc = VBoxContainer.new()
+				var sep = VSeparator.new()
+				label.toggle_mode=true
+				label.toggled.connect(func(toggled_on):
+					if toggled_on:
+						pass
+					else:
+						pass
+					vbc.visible=not(toggled_on)
+					sep.visible=not(toggled_on)
+				)
 				gc.add_child(sep)
 				gc.add_child(vbc)
 				cb.toggled.connect(func(toggled_on) -> void:
@@ -217,12 +226,26 @@ func refresh_mod_list(list : VBoxContainer, path : String) -> void:
 
 func _on_button_add_pressed() -> void:
 	var fd := FileDialog.new()
-	fd.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+	fd.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	fd.access = FileDialog.ACCESS_FILESYSTEM
 	fd.use_native_dialog = true
+	fd.set_filters(PackedStringArray(["*.zip"]))
 	add_child(fd)
-	fd.dir_selected.connect(func(_path: String) -> void:
-		fd.queue_free()
+	fd.file_selected.connect(func(path: String) -> void:
+		var reader = ZIPReader.new()
+		err = reader.open(path)
+		print(path.get_file().trim_suffix(".zip"))
+		var root_dir = DirAccess.open(mods_path.text)
+		var files = reader.get_files()
+		for file_path in files:
+			if file_path.ends_with("/"):
+				root_dir.make_dir_recursive(file_path)
+				continue
+			root_dir.make_dir_recursive(root_dir.get_current_dir().path_join(path.get_file().trim_suffix(".zip")).path_join(file_path).get_base_dir())
+			var file = FileAccess.open(root_dir.get_current_dir().path_join(path.get_file().trim_suffix(".zip")).path_join(file_path), FileAccess.WRITE)
+			var buffer = reader.read_file(file_path)
+			file.store_buffer(buffer)
+		reader.close()
 	)
 	fd.popup_centered()
 
