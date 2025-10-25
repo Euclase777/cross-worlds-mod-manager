@@ -36,17 +36,18 @@ func _ready() -> void:
 	
 func load_settings():
 	err = config.load("user://config.cfg")
-	Global.selected_profile = config.get_value("Profiles","selected_profile", "Default")
-	mods_path.text = config.get_value("Directories", "Mods", "")
-	game_path.text = config.get_value("Directories", "Game", "")
-	var read_profiles = FileAccess.open(game_path.text + "/" + Global.PROFILES, FileAccess.READ)
-	while read_profiles.get_position() < read_profiles.get_length():
-		var json_string = read_profiles.get_line()
-		var parse_result = JSON.to_native(JSON.parse_string(json_string))
-		print("Parse result: ",parse_result)
-		Global.profiles = parse_result
-		Global.profiles.sort()
-	read_profiles.close()
+	if err == 0:
+		Global.selected_profile = config.get_value("Profiles","selected_profile", "Default")
+		mods_path.text = config.get_value("Directories", "Mods", "")
+		game_path.text = config.get_value("Directories", "Game", "")
+		var read_profiles = FileAccess.open(game_path.text + "/" + Global.PROFILES, FileAccess.READ)
+		while read_profiles.get_position() < read_profiles.get_length():
+			var json_string = read_profiles.get_line()
+			var parse_result = JSON.to_native(JSON.parse_string(json_string))
+			print("Parse result: ",parse_result)
+			Global.profiles = parse_result
+			Global.profiles.sort()
+		read_profiles.close()
 
 func _on_button_config_profile_pressed() -> void:
 	if game_path.text == "":
@@ -189,13 +190,14 @@ func refresh_mod_list(list : VBoxContainer, path : String) -> void:
 			label.text=file_name
 			if dir.current_is_dir():
 				var vbc = VBoxContainer.new()
+				vbc.visible=config.get_value("Folders",label.text,true)
 				var sep = VSeparator.new()
+				sep.visible=config.get_value("Folders",label.text,true)
 				label.toggle_mode=true
+				label.button_pressed=not(config.get_value("Folders",label.text,true))
 				label.toggled.connect(func(toggled_on):
-					if toggled_on:
-						pass
-					else:
-						pass
+					config.set_value("Folders",label.text,not(toggled_on))
+					config.save("user://config.cfg")
 					vbc.visible=not(toggled_on)
 					sep.visible=not(toggled_on)
 				)
@@ -431,7 +433,6 @@ func add_mods(location: VBoxContainer, path : String) -> Dictionary:
 				mods.merge(add_mods(child,path.path_join(node.name)))
 	return mods
 
-
 func _on_button_play_pressed() -> void:
 	$VBoxContainer/HBoxContainer/ButtonSave.emit_signal("pressed")
 	var steam_url = "steam://launch/2486820"
@@ -440,3 +441,24 @@ func _on_button_play_pressed() -> void:
 		printerr("Failed to launch Steam game: ", steam_url)
 	else:
 		print("Launched Steam game: ", steam_url)
+
+func _on_button_top_folders_toggled(toggled_on: bool) -> void:
+	for mod_folder in mod_list.get_children():
+		for button in mod_folder.get_children():
+			if button.is_class("Button") and not(button.is_class("CheckBox")):
+				button.button_pressed = toggled_on
+
+func _on_button_bottom_folders_toggled(toggled_on: bool) -> void:
+	for button in mod_list.find_children("*", "Button", true, false):
+		if button.text.contains(".pak") or button.text.contains(".utoc") or button.text.contains(".ucas"):
+			button.get_parent().get_parent().get_parent().get_child(1).button_pressed = toggled_on
+
+func _on_button_checked_folders_toggled(toggled_on: bool) -> void:
+	for check in mod_list.find_children("*", "CheckBox", true, false):
+		if check.button_pressed == true:
+			check.get_parent().get_child(1).button_pressed = toggled_on
+
+func _on_button_unchecked_folders_toggled(toggled_on: bool) -> void:
+	for check in mod_list.find_children("*", "CheckBox", true, false):
+		if check.button_pressed == false:
+			check.get_parent().get_child(1).button_pressed = toggled_on

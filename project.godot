@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="CrossWorldsModManager"
+config/name="CrossModsModManager"
 run/main_scene="uid://dgd8qjkur4o3"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://brgo5cqyd3of2"
 
 [autoload]
 

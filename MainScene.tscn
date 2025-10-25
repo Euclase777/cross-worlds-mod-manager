@@ -28,6 +28,36 @@ current_tab = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Mods"]
+layout_mode = 2
+
+[node name="ButtonTopFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Top Folders"
+
+[node name="ButtonBottomFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Bottom Folders"
+
+[node name="ButtonCheckedFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Checked Folders"
+
+[node name="ButtonUncheckedFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Unchecked Folders"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Mods"]
+layout_mode = 2
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Mods"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -39,6 +69,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList"]
+visible = false
 layout_mode = 2
 columns = 2
 
@@ -251,6 +282,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "OK"
 
+[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonTopFolders" to="." method="_on_button_top_folders_toggled"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonBottomFolders" to="." method="_on_button_bottom_folders_toggled"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonCheckedFolders" to="." method="_on_button_checked_folders_toggled"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonUncheckedFolders" to="." method="_on_button_unchecked_folders_toggled"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxGame/ButtonBrowseGame" to="." method="_on_button_browse_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxGame/ButtonOpenGame" to="." method="_on_button_open_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxMods/ButtonBrowseMods" to="." method="_on_button_browse_mods_pressed"]
