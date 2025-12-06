@@ -1,7 +1,7 @@
 extends Control
 
 var config = ConfigFile.new()
-var mod_array : Dictionary
+
 var err : Error
 
 @onready var WindowProfile: Window = $WindowProfile
@@ -23,7 +23,8 @@ func _ready() -> void:
 			Global.selected_profile=Global.profiles.keys()[0]
 		var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]), FileAccess.READ)
 		if ml:
-			mod_array = str_to_var(ml.get_as_text())
+			Global.mod_array = str_to_var(ml.get_as_text())
+			print("mod_array: ", Global.mod_array)
 			ml.close()
 		refresh_mod_list(mod_list,mods_path.text)
 	var i : int = 0
@@ -77,6 +78,13 @@ func _on_button_browse_mods_pressed() -> void:
 	add_child(fd)
 	fd.dir_selected.connect(func(path: String) -> void:
 		mods_path.text = path
+		if mods_path.text.contains("UNION/Content/Paks/~mods"):
+			var warning = AcceptDialog.new()
+			warning.title = 'Error: "~mods" folder is used'
+			warning.dialog_text = '"~mods" is a folder where mods load in the game. \n Choose the folder where they should be located'
+			add_child(warning)
+			warning.popup_centered()
+			mods_path.text = ""
 		fd.queue_free()
 		config.set_value("Directories","Mods",path)
 		config.save("user://config.cfg")
@@ -143,10 +151,10 @@ func _on_option_button_item_selected(index: int) -> void:
 	config.save("user://config.cfg")
 	var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]), FileAccess.READ)
 	if ml:
-		mod_array = str_to_var(ml.get_as_text())
+		Global.mod_array = str_to_var(ml.get_as_text())
 		ml.close()
 	else:
-		mod_array.clear()
+		Global.mod_array.clear()
 	for mod in mod_list.get_children():
 		mod_list.remove_child(mod)
 		mod.queue_free()
@@ -155,7 +163,7 @@ func _on_option_button_item_selected(index: int) -> void:
 func _on_button_refresh_list_pressed() -> void:
 	var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]), FileAccess.READ)
 	if ml:
-		mod_array = str_to_var(ml.get_as_text())
+		Global.mod_array = str_to_var(ml.get_as_text())
 		ml.close()
 	for mod in mod_list.get_children():
 		mod_list.remove_child(mod)
@@ -176,53 +184,10 @@ func refresh_mod_list(list : VBoxContainer, path : String) -> void:
 	
 	while file_name != "":
 		if (not file_name.begins_with(".")) and (not file_name.ends_with(".ini")):
-			var gc = GridContainer.new()
-			var cb = CheckBox.new()
-			var label = Button.new()
-			list.add_child(gc)
-			gc.name=file_name
-			gc.columns=2
-			gc.add_child(cb)
-			cb.name=file_name
-			cb.size_flags_vertical=Control.SIZE_EXPAND_FILL
-			cb.set_meta("file_path", path.path_join(file_name))
-			gc.add_child(label)
-			label.text=file_name
-			if dir.current_is_dir():
-				var vbc = VBoxContainer.new()
-				vbc.visible=config.get_value("Folders",label.text,true)
-				var sep = VSeparator.new()
-				sep.visible=config.get_value("Folders",label.text,true)
-				label.toggle_mode=true
-				label.button_pressed=not(config.get_value("Folders",label.text,true))
-				label.toggled.connect(func(toggled_on):
-					config.set_value("Folders",label.text,not(toggled_on))
-					config.save("user://config.cfg")
-					vbc.visible=not(toggled_on)
-					sep.visible=not(toggled_on)
-				)
-				gc.add_child(sep)
-				gc.add_child(vbc)
-				cb.toggled.connect(func(toggled_on) -> void:
-					var children_checkbox = cb.get_parent().get_child(-1).find_children("*", "CheckBox", true, false)
-					for checkbox in children_checkbox:
-						checkbox.button_pressed = toggled_on
-						checkbox.disabled = toggled_on
-					if not toggled_on:
-						var parent_checkbox = cb.get_parent().get_parent().get_parent().get_child(0)
-						if parent_checkbox is CheckBox:
-							parent_checkbox.set_pressed_no_signal(false)
-				)
-				refresh_mod_list(vbc,path.path_join(file_name))
-			else:
-				cb.toggled.connect(func(toggled_on) -> void:
-					if not toggled_on:
-						var parent_checkbox = cb.get_parent().get_parent().get_parent().get_child(0)
-						if parent_checkbox is CheckBox:
-							parent_checkbox.set_pressed_no_signal(false)
-				)
-			if mod_array.keys().has(cb.name):
-					cb.button_pressed = true
+			var mod_entry = load("res://ModContainer.tscn").instantiate()
+			mod_entry.mod_path = config.get_value("Directories","Mods").path_join(file_name)
+			mod_entry.top = true
+			list.add_child(mod_entry)
 		file_name = dir.get_next()
 	dir.list_dir_end()
 
@@ -266,25 +231,25 @@ func _on_button_save_pressed() -> void:
 		file_name = dir.get_next()
 	dir.list_dir_end()
 	
-	mod_array.clear()
-	mod_array.merge(add_mods(mod_list, mods_path.text))
+	Global.mod_array.clear()
+	Global.mod_array.merge(add_mods(mod_list))
 	var add : Array[String]
 	var remove : Array[String]
-	for item : String in mod_array.keys():
+	for item : String in Global.mod_array.keys():
 		# Item is in mod_array but not in loaded_mod_array
 		if not loaded_mod_array.has(item):
-			add.append(mod_array[item])
+			add.append(Global.mod_array[item])
 	for item in loaded_mod_array:
 		# Item is in loaded_mod_array but not in the mod_array
-		if not mod_array.keys().has(item):
+		if not Global.mod_array.keys().has(item):
 			remove.append(loading_path.path_join(item))
 	var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]),FileAccess.WRITE)
 	if ml:
-		ml.store_string(str(mod_array))
+		ml.store_string(str(Global.mod_array))
 		ml.close()
 	remove_mods(remove)
 	copy_mods(add, loading_path)
-	print("Final array: ", mod_array)
+	print("Final array: ", Global.mod_array)
 	
 func remove_mods(mods: Array[String]) -> void:
 	for path in mods:
@@ -420,17 +385,17 @@ func copy_directory_recursive(source_dir: String, dest_dir: String) -> void:
 	else:
 		push_error("Failed to open source directory: %s" % source_dir)
 
-func add_mods(location: VBoxContainer, path : String) -> Dictionary:
+func add_mods(location: VBoxContainer) -> Dictionary:
 	var mods : Dictionary
-	var children_nodes = location.get_children()
-	for node in children_nodes:
-		for child in node.get_children():
-			if child is CheckBox:
-				if child.button_pressed and not child.disabled:
-					print("Adding: ", child.get_meta("file_path"))
-					mods[child.name]=child.get_meta("file_path")
-			if child is VBoxContainer:
-				mods.merge(add_mods(child,path.path_join(node.name)))
+	for node in location.get_children():
+		if node is ModContainer:
+			if node.selected:
+				mods[node.mod_name.text]=node.mod_path
+			else:
+				if node.folder:
+					mods.merge(add_mods(node.get_child(-1)))
+		else:
+			print("Wrong node: ", node)
 	return mods
 
 func _on_button_play_pressed() -> void:
@@ -443,22 +408,13 @@ func _on_button_play_pressed() -> void:
 		print("Launched Steam game: ", steam_url)
 
 func _on_button_top_folders_toggled(toggled_on: bool) -> void:
-	for mod_folder in mod_list.get_children():
-		for button in mod_folder.get_children():
-			if button.is_class("Button") and not(button.is_class("CheckBox")):
-				button.button_pressed = toggled_on
+	Global.expand_collapse.emit("top", true, toggled_on)
 
 func _on_button_bottom_folders_toggled(toggled_on: bool) -> void:
-	for button in mod_list.find_children("*", "Button", true, false):
-		if button.text.contains(".pak") or button.text.contains(".utoc") or button.text.contains(".ucas"):
-			button.get_parent().get_parent().get_parent().get_child(1).button_pressed = toggled_on
+	Global.expand_collapse.emit("bottom", true, toggled_on)
 
 func _on_button_checked_folders_toggled(toggled_on: bool) -> void:
-	for check in mod_list.find_children("*", "CheckBox", true, false):
-		if check.button_pressed == true:
-			check.get_parent().get_child(1).button_pressed = toggled_on
+	Global.expand_collapse.emit("selected", true, toggled_on)
 
 func _on_button_unchecked_folders_toggled(toggled_on: bool) -> void:
-	for check in mod_list.find_children("*", "CheckBox", true, false):
-		if check.button_pressed == false:
-			check.get_parent().get_child(1).button_pressed = toggled_on
+	Global.expand_collapse.emit("selected", false, toggled_on)

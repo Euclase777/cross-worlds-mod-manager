@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxeur8pe5106i"]
+
+[ext_resource type="Script" uid="uid://cgqg36j8usucx" path="res://mod_entry.gd" id="1_jh0sc"]
+
+[node name="ModContainer" type="GridContainer"]
+offset_right = 340.0
+offset_bottom = 94.0
+columns = 2
+script = ExtResource("1_jh0sc")
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonCollapse" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+toggle_mode = true
+text = " ▼ "
+
+[node name="ButtonModName" type="LinkButton" parent="HBoxContainer"]
+layout_mode = 2
+text = "Mod Name"
+underline = 2
+
+[node name="LabelVersion" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonOpenFolder" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+text = " 🗁 "
+
+[node name="LabelAuthor" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="HBoxContainer/ButtonCollapse" to="." method="_on_button_collapse_toggled"]
+[connection signal="pressed" from="HBoxContainer/ButtonModName" to="." method="_on_button_mod_name_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonOpenFolder" to="." method="_on_button_open_folder_pressed"]
