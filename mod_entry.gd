@@ -6,7 +6,8 @@ var config = ConfigFile.new()
 @onready var checkbox = $CheckBox
 @onready var button_collapse = $HBoxContainer/ButtonCollapse
 @onready var mod_name = $HBoxContainer/ButtonModName
-@onready var open_folder = $HBoxContainer/ButtonOpenFolder
+@onready var button_open = $HBoxContainer/ButtonOpenFolder
+@onready var button_link = $HBoxContainer/ButtonLink
 @onready var sep = $VSeparator
 @onready var vbox = $VBoxContainer
 @onready var version = $HBoxContainer/LabelVersion
@@ -25,11 +26,11 @@ func _ready() -> void:
 	mod_name.text=mod_path.right(mod_path.length()-mod_path.rfind("/")-1)
 	if FileAccess.file_exists(mod_path):
 		folder = false
-		pass
 	else:
 		folder = true
 		button_collapse.visible = true
-		open_folder.visible = true
+		button_open.visible = true
+		button_link.visible = true
 		sep.visible = true
 		vbox.visible = true
 		bottom = true
@@ -50,14 +51,19 @@ func _ready() -> void:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 		for child_entry in children_entries:
-			if child_entry.mod_name.text.contains(".json"):
+			if child_entry.mod_name.text.contains("info.json"):
 				var json_as_text = FileAccess.get_file_as_string(child_entry.mod_path)
-				var json_as_dict = JSON.parse_string(json_as_text)
+				var json_as_dict : Dictionary = JSON.parse_string(json_as_text)
 				if json_as_dict:
-					mod_name.text = json_as_dict.get("name",mod_name.text)
-					version.text = json_as_dict.get("version","")
-					author.text = json_as_dict.get("author","")
-					mod_name.uri = json_as_dict.get("mod_page","")
+					$WindowLink.file_path = child_entry.mod_path
+					if json_as_dict.has("name"):
+						mod_name.text = json_as_dict.get("name")
+					if json_as_dict.has("version"):
+						version.text = json_as_dict.get("version")
+					if json_as_dict.has("author"):
+						author.text = json_as_dict.get("author")
+					if json_as_dict.has("mod_page"):
+						mod_name.uri = json_as_dict.get("mod_page")
 					if mod_name.uri != "":
 						mod_name.set_underline_mode(LinkButton.UNDERLINE_MODE_ON_HOVER)
 		config.load("user://config.cfg")
@@ -100,3 +106,28 @@ func _on_button_mod_name_pressed() -> void:
 		var uri = get_parent().get_parent().mod_name.uri
 		if uri:
 			OS.shell_open(uri)
+
+func _on_button_link_pressed() -> void:
+	$WindowLink.visible = true
+	var data = {}
+	var file = FileAccess.open(mod_path+"/info.json", FileAccess.READ)
+	if file:
+		var content = file.get_as_text()
+		file.close()
+		var json = JSON.new()
+		var parse_result = json.parse(content)
+		if parse_result == OK:
+			data = json.data
+		else:
+			push_error("Failed to parse JSON: ", json.get_error_message())
+	else:
+		push_error("Failed to open file for reading: ", mod_path+"/info.json")
+	
+	if data.has("characters"):
+		for child in $WindowLink/VBoxContainer/AspectRatioContainer/Panel/MarginContainer/GridContainer.get_children():
+			if data["characters"].has(child.name):
+				child.button_pressed = true
+			else:
+				child.button_pressed = false
+	else:
+		print(data)

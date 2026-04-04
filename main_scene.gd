@@ -7,10 +7,14 @@ var err : Error
 @onready var WindowProfile: Window = $WindowProfile
 @onready var mods_path : LineEdit = $VBoxContainer/TabContainer/Settings/HBoxMods/LineMods
 @onready var game_path : LineEdit = $VBoxContainer/TabContainer/Settings/HBoxGame/LineGame
+
 @onready var option_profile : OptionButton = $VBoxContainer/TabContainer/Settings/HBoxProfile/OptionProfile
 @onready var button_browse_game : Button = $VBoxContainer/TabContainer/Settings/HBoxGame/ButtonBrowseGame
 @onready var button_browse_mods : Button = $VBoxContainer/TabContainer/Settings/HBoxMods/ButtonBrowseMods
+
 @onready var mod_list : VBoxContainer = $VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList
+
+@onready var skin_list : VBoxContainer = $VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList
 
 func _ready() -> void:
 	config.load("user://config.cfg")
@@ -24,7 +28,6 @@ func _ready() -> void:
 		var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]), FileAccess.READ)
 		if ml:
 			Global.mod_array = str_to_var(ml.get_as_text())
-			print("mod_array: ", Global.mod_array)
 			ml.close()
 		refresh_mod_list(mod_list,mods_path.text)
 	var i : int = 0
@@ -144,23 +147,8 @@ func _on_button_open_game_pressed() -> void:
 		OS.shell_open(game_path.text)
 	else:
 		push_error("Storage path is not set or invalid")
-		
-func _on_option_button_item_selected(index: int) -> void:
-	Global.selected_profile=option_profile.get_item_text(index)
-	config.set_value("Profiles","selected_profile",option_profile.get_item_text(index))
-	config.save("user://config.cfg")
-	var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]), FileAccess.READ)
-	if ml:
-		Global.mod_array = str_to_var(ml.get_as_text())
-		ml.close()
-	else:
-		Global.mod_array.clear()
-	for mod in mod_list.get_children():
-		mod_list.remove_child(mod)
-		mod.queue_free()
-	refresh_mod_list(mod_list,mods_path.text)
 
-func _on_button_refresh_list_pressed() -> void:
+func _on_button_refresh_pressed() -> void:
 	var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]), FileAccess.READ)
 	if ml:
 		Global.mod_array = str_to_var(ml.get_as_text())
@@ -183,7 +171,7 @@ func refresh_mod_list(list : VBoxContainer, path : String) -> void:
 	var file_name = dir.get_next()
 	
 	while file_name != "":
-		if (not file_name.begins_with(".")) and (not file_name.ends_with(".ini")):
+		if not (file_name.begins_with(".") or file_name.ends_with(".ini") or file_name == "skins"):
 			var mod_entry = load("res://ModContainer.tscn").instantiate()
 			mod_entry.mod_path = config.get_value("Directories","Mods").path_join(file_name)
 			mod_entry.top = true
@@ -418,3 +406,18 @@ func _on_button_checked_folders_toggled(toggled_on: bool) -> void:
 
 func _on_button_unchecked_folders_toggled(toggled_on: bool) -> void:
 	Global.expand_collapse.emit("selected", false, toggled_on)
+
+func _on_option_profile_item_selected(index: int) -> void:
+	Global.selected_profile=option_profile.get_item_text(index)
+	config.set_value("Profiles","selected_profile",option_profile.get_item_text(index))
+	config.save("user://config.cfg")
+	var ml = FileAccess.open(mods_path.text.path_join(Global.profiles[Global.selected_profile]), FileAccess.READ)
+	if ml:
+		Global.mod_array = str_to_var(ml.get_as_text())
+		ml.close()
+	else:
+		Global.mod_array.clear()
+	for mod in mod_list.get_children():
+		mod_list.remove_child(mod)
+		mod.queue_free()
+	refresh_mod_list(mod_list,mods_path.text)

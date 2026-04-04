@@ -10,22 +10,26 @@ config_version=5
 
 [application]
 
-config/name="CrossModsModManager"
-run/main_scene="uid://dgd8qjkur4o3"
-config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="uid://brgo5cqyd3of2"
+config/name="CrossSkins"
+run/main_scene="res://MainScene.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*uid://cbyuy5gyvu2vj"
 
 [display]
 
-window/size/viewport_width=585
-window/size/viewport_height=666
-window/size/resizable=false
+window/size/viewport_height=572
+window/stretch/mode="canvas_items"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 
+rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

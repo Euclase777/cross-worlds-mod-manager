@@ -1,204 +1,650 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgd8qjkur4o3"]
+[gd_scene format=3 uid="uid://brg58i7085xvl"]
 
-[ext_resource type="Script" uid="uid://6jh33j1rpfwk" path="res://main_scene.gd" id="1_3mqji"]
-[ext_resource type="Script" uid="uid://dawmrae7xdgr0" path="res://window_profile.gd" id="2_x4av3"]
+[ext_resource type="Script" uid="uid://jl62s60aic7i" path="res://main_scene.gd" id="1_uxrcv"]
+[ext_resource type="Texture2D" uid="uid://brakoi4jxglwa" path="res://CSS.png" id="2_rf2cd"]
+[ext_resource type="Theme" uid="uid://cncdh0mylpabs" path="res://CSS_buttons.tres" id="3_a814b"]
+[ext_resource type="Script" uid="uid://c0pgebkfnfjfc" path="res://window_profile.gd" id="4_5crlr"]
 
-[node name="MainScene" type="Control"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7kicx"]
+texture = ExtResource("2_rf2cd")
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_e3n6b"]
+
+[node name="MainScene" type="Control" unique_id=1759779414]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -585.0
-offset_bottom = -666.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_behavior_recursive = 1
-script = ExtResource("1_3mqji")
+script = ExtResource("1_uxrcv")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 585.0
-offset_bottom = 666.0
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1007837775]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer" unique_id=18035243]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 1
 
-[node name="Mods" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+[node name="Skins" type="HBoxContainer" parent="VBoxContainer/TabContainer" unique_id=892706327]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Mods"]
-layout_mode = 2
-
-[node name="ButtonTopFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
+[node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/TabContainer/Skins" unique_id=1205622425]
 layout_mode = 2
 size_flags_horizontal = 3
-toggle_mode = true
-text = "Top Folders"
 
-[node name="ButtonBottomFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-text = "Bottom Folders"
-
-[node name="ButtonCheckedFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-text = "Checked Folders"
-
-[node name="ButtonUncheckedFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-text = "Unchecked Folders"
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Mods"]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Mods"]
-layout_mode = 2
-size_flags_vertical = 3
-vertical_scroll_mode = 2
-
-[node name="VBoxModsList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Skins/ScrollContainer2" unique_id=1260643352]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList"]
+[node name="Button2" type="Button" parent="VBoxContainer/TabContainer/Skins/ScrollContainer2/VBoxContainer" unique_id=1364635256]
+layout_mode = 2
+text = "What am I doing"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/TabContainer/Skins" unique_id=1323223274]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.2
+ratio = 1.1838
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer" unique_id=1830255445]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7kicx")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel" unique_id=1514113223]
+layout_mode = 2
+theme_override_constants/margin_left = 21
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 14
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer" unique_id=407110816]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 11
+theme_override_constants/v_separation = 7
+columns = 8
+
+[node name="sonic" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=456807508]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="tails" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=2079826020]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="knuckles" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1165399170]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="amy" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1183986973]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="cream" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1544149774]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="big" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1917645559]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="silver" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1869626369]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="blaze" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=2041887720]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="shadow" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=471097582]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="rouge" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1464325383]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="omega" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1184121707]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="vector" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=75362966]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="espio" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=215460130]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="charmy" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1643716738]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="zavok" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=492243210]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="zazz" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=2123702089]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="eggman" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1348268842]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="metal" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=261180449]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="eggrobo" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1609862598]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="sage" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=342683751]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="jet" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=2057946855]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="wave" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=345315678]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="storm" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1818429456]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="supersonic" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=44053560]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="nine" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1125598178]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="dread" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1597766684]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="rusty" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1621221841]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="tangle" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=2052942946]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="whisper" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1943211962]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="nights" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=693452402]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="joker" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=886644050]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="ichiban" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1247245389]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="aiai" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=865356134]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="miku" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=140417015]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="steve" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=639114475]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="alex" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=2092567440]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="creeper" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=281280789]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="spongebob" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1152141006]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="patrick" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1113545065]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="pacman" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=1572424638]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="ghosts" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=42900258]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="megaman" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=57178973]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="protoman" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=766652023]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="red" type="Button" parent="VBoxContainer/TabContainer/Skins/AspectRatioContainer/Panel/MarginContainer/GridContainer" unique_id=889426165]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_a814b")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_e3n6b")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Skins" unique_id=1644158490]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxSkinsList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Skins/ScrollContainer" unique_id=29925205]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList" unique_id=1726544631]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList/GridContainer" unique_id=1283127827]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList/GridContainer" unique_id=1302212651]
 layout_mode = 2
 toggle_mode = true
 text = "Collapse"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList/GridContainer" unique_id=1416423173]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList/GridContainer" unique_id=1588895501]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList/GridContainer/VBoxContainer" unique_id=1029127211]
 layout_mode = 2
 columns = 2
 
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer"]
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList/GridContainer/VBoxContainer/GridContainer" unique_id=396489977]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Skins/ScrollContainer/VBoxSkinsList/GridContainer/VBoxContainer/GridContainer" unique_id=1496684725]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "File Example"
 
-[node name="Settings" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
-visible = false
+[node name="Mods" type="VBoxContainer" parent="VBoxContainer/TabContainer" unique_id=1833822015]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="HBoxGame" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Mods" unique_id=1778726337]
 layout_mode = 2
 
-[node name="LabelGame" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+[node name="ButtonTopFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer" unique_id=980840447]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Top Folders"
+
+[node name="ButtonBottomFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer" unique_id=685440778]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Bottom Folders"
+
+[node name="ButtonCheckedFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer" unique_id=1621415679]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Checked Folders"
+
+[node name="ButtonUncheckedFolders" type="Button" parent="VBoxContainer/TabContainer/Mods/HBoxContainer" unique_id=1969048377]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Unchecked Folders"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Mods" unique_id=773496572]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Mods" unique_id=1085945321]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 2
+
+[node name="VBoxModsList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer" unique_id=857877431]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList" unique_id=202287717]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer" unique_id=868340663]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer" unique_id=674267674]
+layout_mode = 2
+toggle_mode = true
+text = "Collapse"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer" unique_id=975684026]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer" unique_id=1085731326]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer" unique_id=1880342318]
+layout_mode = 2
+columns = 2
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer" unique_id=866046195]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Mods/ScrollContainer/VBoxModsList/GridContainer/VBoxContainer/GridContainer" unique_id=84601094]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "File Example"
+
+[node name="Settings" type="VBoxContainer" parent="VBoxContainer/TabContainer" unique_id=637628848]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="HBoxGame" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings" unique_id=526259270]
+layout_mode = 2
+
+[node name="LabelGame" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxGame" unique_id=596253902]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Game Directory:"
 
-[node name="LineGame" type="LineEdit" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+[node name="LineGame" type="LineEdit" parent="VBoxContainer/TabContainer/Settings/HBoxGame" unique_id=466485324]
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
 
-[node name="ButtonBrowseGame" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+[node name="ButtonBrowseGame" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxGame" unique_id=410620277]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Browse"
 
-[node name="ButtonOpenGame" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxGame"]
+[node name="ButtonOpenGame" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxGame" unique_id=588639299]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Open"
 
-[node name="HBoxMods" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings"]
+[node name="HBoxMods" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings" unique_id=1388263624]
 layout_mode = 2
 
-[node name="LabelMods" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+[node name="LabelMods" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxMods" unique_id=551559260]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Mods Directory:"
 
-[node name="LineMods" type="LineEdit" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+[node name="LineMods" type="LineEdit" parent="VBoxContainer/TabContainer/Settings/HBoxMods" unique_id=850113559]
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
 
-[node name="ButtonBrowseMods" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+[node name="ButtonBrowseMods" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxMods" unique_id=1820436397]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Browse"
 
-[node name="ButtonOpenMods" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxMods"]
+[node name="ButtonOpenMods" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxMods" unique_id=1377170611]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Open"
 
-[node name="HBoxProfile" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings"]
+[node name="HBoxProfile" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings" unique_id=1320051266]
 layout_mode = 2
 
-[node name="LabelProile" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxProfile"]
+[node name="LabelProile" type="Label" parent="VBoxContainer/TabContainer/Settings/HBoxProfile" unique_id=1154543024]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Profile:"
 
-[node name="OptionProfile" type="OptionButton" parent="VBoxContainer/TabContainer/Settings/HBoxProfile"]
+[node name="OptionProfile" type="OptionButton" parent="VBoxContainer/TabContainer/Settings/HBoxProfile" unique_id=728850376]
 layout_mode = 2
 size_flags_horizontal = 3
 allow_reselect = true
 
-[node name="ButtonConfigProfile" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxProfile"]
+[node name="ButtonConfigProfile" type="Button" parent="VBoxContainer/TabContainer/Settings/HBoxProfile" unique_id=166241390]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Config
 "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 57)
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=299411750]
 layout_mode = 2
-alignment = 1
 
-[node name="ButtonAdd" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ButtonAdd" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=639003856]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Add Mod From Zip"
+text = "Open Mod Folder"
 
-[node name="ButtonRefreshList" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ButtonRefresh" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1324506726]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Refresh List"
+text = "Refresh Mod Lists"
 
-[node name="ButtonSave" type="Button" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 0)
+[node name="ButtonSave" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=597249347]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Save"
 
-[node name="ButtonPlay" type="Button" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 0)
+[node name="ButtonPlay" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1067818779]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Save and Play"
 
-[node name="WindowProfile" type="Window" parent="."]
+[node name="WindowProfile" type="Window" parent="." unique_id=941680995]
 oversampling_override = 1.0
 title = "Profiles"
 initial_position = 1
@@ -209,9 +655,9 @@ exclusive = true
 borderless = true
 popup_window = true
 extend_to_title = true
-script = ExtResource("2_x4av3")
+script = ExtResource("4_5crlr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WindowProfile"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WindowProfile" unique_id=378274921]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -220,81 +666,77 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WindowProfile/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowProfile/VBoxContainer" unique_id=791540883]
 layout_mode = 2
 
-[node name="LabelProfileName" type="Label" parent="WindowProfile/VBoxContainer/HBoxContainer"]
+[node name="LabelProfileName" type="Label" parent="WindowProfile/VBoxContainer/HBoxContainer" unique_id=1309266011]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name"
 horizontal_alignment = 1
 
-[node name="LabelFileName" type="Label" parent="WindowProfile/VBoxContainer/HBoxContainer"]
+[node name="LabelFileName" type="Label" parent="WindowProfile/VBoxContainer/HBoxContainer" unique_id=1358048994]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "File Name"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="WindowProfile/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="WindowProfile/VBoxContainer" unique_id=761894045]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WindowProfile/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WindowProfile/VBoxContainer/ScrollContainer" unique_id=749316693]
 layout_mode = 2
 
-[node name="CheckButton" type="CheckButton" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="CheckButton" type="CheckButton" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=230778192]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton" unique_id=699065587]
 layout_mode = 0
 offset_right = 593.0
 offset_bottom = 31.0
 
-[node name="LineEdit" type="LineEdit" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton/HBoxContainer" unique_id=1594241024]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LineEdit2" type="LineEdit" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton/HBoxContainer"]
+[node name="LineEdit2" type="LineEdit" parent="WindowProfile/VBoxContainer/ScrollContainer/VBoxContainer/CheckButton/HBoxContainer" unique_id=333547712]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxWindowProfile" type="HBoxContainer" parent="WindowProfile/VBoxContainer"]
+[node name="HBoxWindowProfile" type="HBoxContainer" parent="WindowProfile/VBoxContainer" unique_id=1106640110]
 layout_mode = 2
 
-[node name="ButtonCreateProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+[node name="ButtonCreateProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile" unique_id=839438002]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Create"
 
-[node name="ButtonImportProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+[node name="ButtonImportProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile" unique_id=1566622880]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Import"
 
-[node name="ButtonRemoveProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+[node name="ButtonRemoveProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile" unique_id=401636537]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove"
 
-[node name="ButtonOKProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile"]
+[node name="ButtonOKProfile" type="Button" parent="WindowProfile/VBoxContainer/HBoxWindowProfile" unique_id=764381781]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "OK"
 
-[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonTopFolders" to="." method="_on_button_top_folders_toggled"]
-[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonBottomFolders" to="." method="_on_button_bottom_folders_toggled"]
-[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonCheckedFolders" to="." method="_on_button_checked_folders_toggled"]
-[connection signal="toggled" from="VBoxContainer/TabContainer/Mods/HBoxContainer/ButtonUncheckedFolders" to="." method="_on_button_unchecked_folders_toggled"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxGame/ButtonBrowseGame" to="." method="_on_button_browse_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxGame/ButtonOpenGame" to="." method="_on_button_open_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxMods/ButtonBrowseMods" to="." method="_on_button_browse_mods_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxMods/ButtonOpenMods" to="." method="_on_button_open_mods_pressed"]
-[connection signal="item_selected" from="VBoxContainer/TabContainer/Settings/HBoxProfile/OptionProfile" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/TabContainer/Settings/HBoxProfile/OptionProfile" to="." method="_on_option_profile_item_selected"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Settings/HBoxProfile/ButtonConfigProfile" to="." method="_on_button_config_profile_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonAdd" to="." method="_on_button_add_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonRefreshList" to="." method="_on_button_refresh_list_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonRefresh" to="." method="_on_button_refresh_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonSave" to="." method="_on_button_save_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
 [connection signal="about_to_popup" from="WindowProfile" to="WindowProfile" method="_on_about_to_popup"]
